@@ -1,5 +1,14 @@
+.classpath
+.settings
+.project
+
+.idea
+*.iml
+
 target
-*.class
+bin
+
+settings.xml
 
 # Package Files #
 *.jar
