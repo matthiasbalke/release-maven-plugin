@@ -1,4 +1,4 @@
-package de.balketechnologies.maven.release.plugin;
+package de.balketechnologies.maven.plugins.release;
 
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Plugin;
@@ -7,18 +7,19 @@ import org.apache.maven.plugin.BuildPluginManager;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Component;
-import org.apache.maven.project.MavenProject;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.configuration.xml.XmlPlexusConfiguration;
 
-import static org.twdata.maven.mojoexecutor.MojoExecutor.*;
+import static org.twdata.maven.mojoexecutor.MojoExecutor.executeMojo;
+import static org.twdata.maven.mojoexecutor.MojoExecutor.executionEnvironment;
 import static org.twdata.maven.mojoexecutor.PlexusConfigurationUtils.toXpp3Dom;
 
 @Mojo(name = "release")
 public class ReleaseMojo extends AbstractMojo {
 	/**
 	 * Plugin to execute.
-	 * 
+	 *
 	 * @parameter
 	 * @required
 	 */
@@ -26,7 +27,7 @@ public class ReleaseMojo extends AbstractMojo {
 
 	/**
 	 * Plugin goal to execute.
-	 * 
+	 *
 	 * @parameter
 	 * @required
 	 */
@@ -34,14 +35,14 @@ public class ReleaseMojo extends AbstractMojo {
 
 	/**
 	 * Plugin configuration to use in the execution.
-	 * 
+	 *
 	 * @parameter
 	 */
 	private XmlPlexusConfiguration configuration;
 
 	/**
 	 * The project currently being build.
-	 * 
+	 *
 	 * @parameter expression="${project}"
 	 * @required
 	 * @readonly
@@ -51,7 +52,7 @@ public class ReleaseMojo extends AbstractMojo {
 
 	/**
 	 * The current Maven session.
-	 * 
+	 *
 	 * @parameter expression="${session}"
 	 * @required
 	 * @readonly
@@ -61,17 +62,15 @@ public class ReleaseMojo extends AbstractMojo {
 
 	/**
 	 * The Maven BuildPluginManager component.
-	 * 
+	 *
 	 * @component
 	 * @required
 	 */
 	@Component
 	private BuildPluginManager pluginManager;
 
-	@Override
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		// TODO remove this example and implement real workflow
 		executeMojo(plugin, goal, toXpp3Dom(configuration), executionEnvironment(mavenProject, mavenSession, pluginManager));
 	}
-
 }
