@@ -11,7 +11,7 @@
 
 
 	<modules>
-		<module>plugin</module>
+		<module>release-maven-plugin</module>
 	</modules>
 
 	<properties>
